@@ -1,18 +1,22 @@
 <?php
 
+// print_r($argv);
+// exit();
 
-$csvdata = csv_in_array( "./examples/WordsList.csv");
+if (count($argv) > 1) {
+	$csvdata = csv_in_array($argv[1]);
 
-foreach($csvdata as $line)
-{
-	$line = str_replace("\"", "", $line);
-	$word_data = explode("-", $line);
-    if (count($word_data) > 0) {
-    	$word1 = $word_data[0];
-        $fileName = "out/".ltrim(rtrim($word1)).".png";
-        if (strlen($fileName) > 0)
-        	saveToPng($line, $fileName);
-    }
+	foreach($csvdata as $line)
+	{
+		$line = str_replace("\"", "", $line);
+		$word_data = explode("-", $line);
+	    if (count($word_data) > 0) {
+	    	$word1 = $word_data[0];
+	        $fileName = "out/".ltrim(rtrim($word1)).".png";
+	        if (strlen($fileName) > 0)
+	        	saveToPng($line, $fileName);
+	    }
+	}
 }
 
 function csv_in_array($url) { 
@@ -35,7 +39,6 @@ function csv_in_array($url) {
 
 	return $out; 
 }
-
 
 function saveToPng($text, $path) {
 	// Create a 300x150 image
